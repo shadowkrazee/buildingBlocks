@@ -40,7 +40,7 @@ export class BlockComponent implements OnInit, OnDestroy {
     this.commonStyleString =
       'height:2vw;width:2vw;margin:1px;border-radius:5px;transition:background-color 2s ease;';
     this.bgColorString = 'hsl(0,0%,0%);';
-    this.defBG = false;
+    this.defBG = true;
     this.toggleBG();
     // this.interval = setInterval(() => {
     //   this.toggleState();
@@ -78,54 +78,4 @@ export class BlockComponent implements OnInit, OnDestroy {
     // console.log('bg changed to hov');
     this.safeStyle = this.sanitizer.bypassSecurityTrustStyle(styleString);
   }
-  // getComplimentaryColor(color: number) {
-  //   let compliment = color - 360;
-  //   if (compliment < 0) {
-  //     compliment = compliment * -1;
-  //   }
-  //   return compliment;
-  // }
-  // makeStrings(flag: string) {
-  //   this.bgColorString = 'hsl(' + this.bgColor + ',100%,50%);';
-  //   if (flag === 'first') {
-  //     this.bgColorString = 'hsl(' + this.bgColor + ',100%,0%);';
-  //   }
-  //   this.hovColorString = 'hsl(' + this.hovColor + ',100%,50%);';
-  //   // console.log(this.bgColorString);
-  //   let styleString =
-  //     `
-  // 		height:2vw;
-  // 		width:2vw;
-  // 		margin:1px;
-  // 		border-radius:5px;` +
-  //     'background-color:' +
-  //     this.bgColorString;
-
-  //   this.safeStyle = this.sanitizer.bypassSecurityTrustStyle(styleString);
-  // }
-  // applyHovBG() {
-  //   let styleString =
-  //     `
-  // 		height:2vw;
-  // 		width:2vw;
-  // 		margin:1px;
-  // 		border-radius:5px;` +
-  //     'background-color:' +
-  //     this.hovColorString;
-  //   // console.log('bg changed to hov');
-  //   this.safeStyle = this.sanitizer.bypassSecurityTrustStyle(styleString);
-  // }
-  // applyRegBG() {
-  //   this.getColors();
-  //   let styleString =
-  //     `
-  // height:2vw;
-  // width:2vw;
-  // margin:1px;
-  // border-radius:5px;` +
-  //     'background-color:' +
-  //     this.bgColorString;
-  //   // console.log('bg changed to reg');
-  //   this.safeStyle = this.sanitizer.bypassSecurityTrustStyle(styleString);
-  // }
 }
