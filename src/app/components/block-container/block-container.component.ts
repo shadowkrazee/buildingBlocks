@@ -9,12 +9,15 @@ import { BlockComponent } from '../block/block.component';
   styleUrls: ['./block-container.component.css']
 })
 export class BlockContainerComponent implements OnInit {
+  public static currentRowIndex = 0;
   blocks: BlockComponent[];
-  constructor(private sanitizer: DomSanitizer) {
-    this.blocks = this.generateBlocks();
-  }
+  constructor(private sanitizer: DomSanitizer) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    BlockComponent.currentColumnIndex = 0;
+    this.blocks = this.generateBlocks();
+    BlockContainerComponent.currentRowIndex++;
+  }
 
   generateBlocks() {
     let newBlocks = new Array(47);

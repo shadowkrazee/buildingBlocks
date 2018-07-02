@@ -2,30 +2,17 @@ import { state } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
+import { BlockContainerComponent } from '../block-container/block-container.component';
+
 @Component({
   selector: 'app-block',
   templateUrl: './block.component.html',
   styleUrls: ['./block.component.css']
-  // animations: [
-  //   trigger('blockState', [
-  //     state(
-  //       'inactive',
-  //       style({
-  //         backgroundColor: 'black'
-  //       })
-  //     ),
-  //     state(
-  //       'active',
-  //       style({
-  //         backgroundColor: 'red'
-  //       })
-  //     ),
-  //     transition('inactive => active', animate('100ms ease-in')),
-  //     transition('active => inactive', animate('1000ms ease-out'))
-  //   ])
-  // ]
 })
 export class BlockComponent implements OnInit, OnDestroy {
+  public static currentColumnIndex = 0;
+  columnIndex: number;
+  rowIndex: number;
   bgColorString: string;
   defBG: boolean;
   commonStyleString: string;
@@ -34,13 +21,16 @@ export class BlockComponent implements OnInit, OnDestroy {
   public state: string;
   constructor(private sanitizer: DomSanitizer) {
     this.state = 'inactive';
+    this.columnIndex = BlockComponent.currentColumnIndex;
+    BlockComponent.currentColumnIndex++;
+    this.rowIndex = BlockContainerComponent.currentRowIndex;
   }
 
   ngOnInit() {
     this.commonStyleString =
       'height:2vw;width:2vw;margin:1px;border-radius:5px;transition:background-color 2s ease;';
     this.bgColorString = 'hsl(0,0%,0%);';
-    this.defBG = true;
+    this.defBG = false;
     this.toggleBG();
     // this.interval = setInterval(() => {
     //   this.toggleState();
