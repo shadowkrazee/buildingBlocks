@@ -9,20 +9,40 @@ import { BlockContainerComponent } from './components/block-container/block-cont
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'app';
   containers: BlockContainerComponent[];
+  title = 'app';
+
+  public gridClear() {
+    let bottom = false;
+    let right = false;
+    let row = 2;
+    let column = 0;
+    while (!bottom || !right) {
+      if (!bottom) {
+        bottom = row > this.containers.length ? false : true;
+        console.log(this.containers);
+        console.log(this.containers[row]);
+        console.log(row);
+        bottom = true;
+      }
+      if (!right) {
+        right = true;
+      }
+    }
+  }
 
   constructor(private sanitizer: DomSanitizer) {}
   ngOnInit() {
-    this.containers = this.generateContainers();
+    BlockContainerComponent.currentRowIndex = 0;
+    this.generateContainers();
+    console.log(this.containers);
   }
 
   generateContainers() {
-    let newContainers = new Array(26);
-    newContainers.forEach((element, index) => {
+    this.containers = new Array(26);
+    this.containers.forEach((element, index) => {
       element = new BlockContainerComponent(this.sanitizer);
-      newContainers[index] = element;
+      this.containers[index] = element;
     });
-    return newContainers;
   }
 }

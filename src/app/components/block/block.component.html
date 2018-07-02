@@ -1,5 +1,5 @@
 <!-- <div style="height:2vw;width:2vw;margin:1px;border-radius:5px;transition:background-color 500ms ease;" [@blockState]="state" (mouseover)="toggleState()" (mouseout)="toggleState()"></div> -->
 <!-- <div [style]="safeStyle" (mouseover)="toggleBG('rand')" (mouseout)="toggleBG('def')"></div> -->
-<div [style]="safeStyle" (mouseover)="toggleBG()">
-	<p style="font-size:8pt;color:white;margin:0px;padding:0px;">({{rowIndex}},{{columnIndex}})</p>
+<div [style]="safeStyle" (mouseover)="toggleBG()" (click)="startGridClear()">
+	<p style="font-size:8pt;color:white;margin:0px;padding:0px;pointer-events:none;">({{rowIndex}},{{columnIndex}})</p>
 </div>

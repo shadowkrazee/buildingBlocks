@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { BlockComponent } from '../block/block.component';
@@ -13,6 +13,11 @@ export class BlockContainerComponent implements OnInit {
   blocks: BlockComponent[];
   constructor(private sanitizer: DomSanitizer) {}
 
+  @Output() clear = new EventEmitter<string>();
+
+  startGridClear() {
+    this.clear.emit('clear!');
+  }
   ngOnInit() {
     BlockComponent.currentColumnIndex = 0;
     this.blocks = this.generateBlocks();
@@ -26,5 +31,14 @@ export class BlockContainerComponent implements OnInit {
       newBlocks[index] = element;
     });
     return newBlocks;
+  }
+  gridClear() {
+    this.startGridClear();
+  }
+  public resetBlocks() {
+    this.blocks.forEach(element => {
+      element.defBG = false;
+      element.toggleBG();
+    });
   }
 }

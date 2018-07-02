@@ -1,5 +1,5 @@
 import { state } from '@angular/animations';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 
 import { BlockContainerComponent } from '../block-container/block-container.component';
@@ -19,22 +19,25 @@ export class BlockComponent implements OnInit, OnDestroy {
   safeStyle: SafeStyle;
   interval: any;
   public state: string;
-  constructor(private sanitizer: DomSanitizer) {
+
+  @Output() clear = new EventEmitter<string>();
+
+  startGridClear() {
+    this.clear.emit('clear!');
+  }
+  constructor(private sanitizer: DomSanitizer) {}
+
+  ngOnInit() {
     this.state = 'inactive';
     this.columnIndex = BlockComponent.currentColumnIndex;
     BlockComponent.currentColumnIndex++;
-    this.rowIndex = BlockContainerComponent.currentRowIndex;
-  }
+    this.rowIndex = BlockContainerComponent.currentRowIndex - 1;
 
-  ngOnInit() {
     this.commonStyleString =
       'height:2vw;width:2vw;margin:1px;border-radius:5px;transition:background-color 2s ease;';
     this.bgColorString = 'hsl(0,0%,0%);';
     this.defBG = false;
     this.toggleBG();
-    // this.interval = setInterval(() => {
-    //   this.toggleState();
-    // }, Math.floor(1000 + Math.random() * 9000));
   }
   ngOnDestroy() {
     // clearInterval(this.interval);
@@ -43,11 +46,6 @@ export class BlockComponent implements OnInit, OnDestroy {
     this.state = this.state === 'active' ? 'inactive' : 'active';
     // console.log(this.state);
   }
-  // getColors() {
-  //   this.bgColor = this.randomColor();
-  //   this.hovColor = this.getComplimentaryColor(this.bgColor);
-  //   this.makeStrings('notFirst');
-  // }
   randomColorString() {
     let hue = Math.floor(Math.random() * 359);
     let saturation = Math.floor(50 + Math.random() * 50);
