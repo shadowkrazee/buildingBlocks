@@ -13,36 +13,32 @@ export class AppComponent implements OnInit {
   title = 'app';
 
   public gridClear() {
-    let bottom = false;
-    let right = false;
-    let row = 2;
-    let column = 0;
-    while (!bottom || !right) {
-      if (!bottom) {
-        bottom = row > this.containers.length ? false : true;
-        console.log(this.containers);
-        console.log(this.containers[row]);
-        console.log(row);
-        bottom = true;
-      }
-      if (!right) {
-        right = true;
-      }
-    }
+    // let bottom = false;
+    // let right = false;
+    // let row = 0;
+    // let column = 0;
+    // while (!bottom) {
+    //   if (!bottom) {
+    //     bottom = row > this.containers.length ? false : true;
+    //     this.containers[row].resetBlocks();
+    //     row++;
+    //     // bottom = true;
+    //   }
+    // }
+    this.generateContainers();
   }
 
   constructor(private sanitizer: DomSanitizer) {}
   ngOnInit() {
-    BlockContainerComponent.currentRowIndex = 0;
     this.generateContainers();
-    console.log(this.containers);
+    // console.log(this.containers);
   }
 
   generateContainers() {
+    BlockContainerComponent.currentRowIndex = 0;
     this.containers = new Array(26);
-    this.containers.forEach((element, index) => {
-      element = new BlockContainerComponent(this.sanitizer);
-      this.containers[index] = element;
-    });
+    for (let i = 0; i < this.containers.length; i++) {
+      this.containers[i] = new BlockContainerComponent(this.sanitizer);
+    }
   }
 }

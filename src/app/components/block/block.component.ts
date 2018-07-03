@@ -34,7 +34,7 @@ export class BlockComponent implements OnInit, OnDestroy {
     this.rowIndex = BlockContainerComponent.currentRowIndex - 1;
 
     this.commonStyleString =
-      'height:2vw;width:2vw;margin:1px;border-radius:5px;transition:background-color 2s ease;';
+      'height:2vw;width:2vw;margin:1px;border-radius:0.5vw;transition:background-color 2s ease;box-shadow:0px 0px 5px 5px ';
     this.bgColorString = 'hsl(0,0%,0%);';
     this.defBG = false;
     this.toggleBG();
@@ -56,11 +56,17 @@ export class BlockComponent implements OnInit, OnDestroy {
     let styleString = '';
     if (!this.defBG) {
       styleString =
-        this.commonStyleString + 'background-color:' + this.bgColorString;
+        this.commonStyleString +
+        this.randomColorString() +
+        ';background-color:' +
+        this.bgColorString;
       this.defBG = true;
     } else {
       styleString =
-        this.commonStyleString + 'background-color:' + this.randomColorString();
+        this.commonStyleString +
+        this.randomColorString() +
+        ';background-color:' +
+        this.randomColorString();
       this.defBG = false;
     }
     // console.log('bg changed to hov');

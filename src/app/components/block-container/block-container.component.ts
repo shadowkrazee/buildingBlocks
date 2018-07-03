@@ -20,25 +20,19 @@ export class BlockContainerComponent implements OnInit {
   }
   ngOnInit() {
     BlockComponent.currentColumnIndex = 0;
-    this.blocks = this.generateBlocks();
+    this.blocks = new Array(47);
+    for (let i = 0; i < this.blocks.length; i++) {
+      this.blocks[i] = new BlockComponent(this.sanitizer);
+    }
     BlockContainerComponent.currentRowIndex++;
-  }
-
-  generateBlocks() {
-    let newBlocks = new Array(47);
-    newBlocks.forEach((element, index) => {
-      element = new BlockComponent(this.sanitizer);
-      newBlocks[index] = element;
-    });
-    return newBlocks;
   }
   gridClear() {
     this.startGridClear();
   }
   public resetBlocks() {
-    this.blocks.forEach(element => {
-      element.defBG = false;
-      element.toggleBG();
-    });
+    for (let i = 0; i < this.blocks.length; i++) {
+      this.blocks[i].defBG = false;
+      this.blocks[i].toggleBG();
+    }
   }
 }
